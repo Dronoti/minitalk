@@ -6,7 +6,7 @@
 /*   By: bkael <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:14:59 by bkael             #+#    #+#             */
-/*   Updated: 2021/07/13 14:15:19 by bkael            ###   ########.fr       */
+/*   Updated: 2021/07/17 14:15:19 by bkael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_sending(int pid, char *message)
 				send = kill(pid, SIGUSR2);
 			ft_check_error(send, 'c', NULL);
 			counter >>= 1;
-			pause();
+			usleep(100);
 		}
 	}
 }
@@ -46,7 +46,7 @@ void	ft_check_arg(int argc, char **argv)
 		ft_putendl_fd("Error: wrong numbers of arguments", 2);
 		exit(EXIT_FAILURE);
 	}
-	while(argv[1][i])
+	while (argv[1][i])
 	{
 		if (!ft_isdigit(argv[1][i]))
 		{
@@ -70,12 +70,12 @@ void	ft_confirm(int signum, siginfo_t *siginfo, void *data)
 
 int	main(int argc, char **argv)
 {
-	int send;
+	int	send;
 
 	ft_check_arg(argc, argv);
-	send = ft_receiver(SIGUSR1, &ft_confirm);
 	send = ft_receiver(SIGUSR2, &ft_confirm);
 	ft_check_error(send, 'p', NULL);
 	ft_sending(ft_atoi(argv[1]), argv[2]);
+	pause();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bkael <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:15:39 by bkael             #+#    #+#             */
-/*   Updated: 2021/07/13 14:16:02 by bkael            ###   ########.fr       */
+/*   Updated: 2021/07/17 14:16:02 by bkael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,32 +52,30 @@ void	ft_getting(int signum, siginfo_t *siginfo, void *data)
 	if (!counter)
 	{
 		msg = ft_create_msg(msg, c);
-		if (c != '\0')
-			send = kill(siginfo->si_pid, SIGUSR1);
-		else
+		if (c == '\0')
 		{
 			ft_show_message(&msg);
 			send = kill(siginfo->si_pid, SIGUSR2);
+			ft_check_error(send, 's', &msg);
 		}
 		c = 0;
 		counter = 128;
 	}
-	else
-		send = kill(siginfo->si_pid, SIGUSR1);
-	ft_check_error(send, 's', &msg);
 }
 
 int	main(void)
 {
 	int	send;
 
+	if (getpid() == 0)
+		exit(EXIT_FAILURE);
 	ft_putstr_fd("The server is running\nPID: ", 1);
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
 	send = ft_receiver(SIGUSR1, &ft_getting);
 	send = ft_receiver(SIGUSR2, &ft_getting);
 	ft_check_error(send, 'r', NULL);
-	while (1)
+	while (send != -1)
 		pause();
 	return (0);
 }

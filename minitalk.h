@@ -6,7 +6,7 @@
 /*   By: bkael <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:10:39 by bkael             #+#    #+#             */
-/*   Updated: 2021/07/13 14:11:40 by bkael            ###   ########.fr       */
+/*   Updated: 2021/07/15 14:11:40 by bkael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>
-#include <stdio.h>
 
 int		ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);

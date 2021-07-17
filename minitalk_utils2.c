@@ -6,7 +6,7 @@
 /*   By: bkael <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/13 14:33:37 by bkael             #+#    #+#             */
-/*   Updated: 2021/07/13 14:34:02 by bkael            ###   ########.fr       */
+/*   Updated: 2021/07/16 14:34:02 by bkael            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_receiver(int signum, void (*hdl)(int, siginfo_t *, void *))
 
 void	ft_check_error(int send, int err, char **str)
 {
-	if (send == -1)
+	if (send != 0)
 	{
 		if (err == 'm')
 			ft_putendl_fd("Error: malloc error", 2);
