@@ -13,6 +13,9 @@
 NAME = client
 NAME2 = server
 
+NAME_BONUS = client_bonus
+NAME2_BONUS = server_bonus
+
 SRC = client.c \
 	minitalk_utils.c \
 	minitalk_utils2.c
@@ -21,12 +24,36 @@ SRC2 = server.c \
 	minitalk_utils.c \
 	minitalk_utils2.c
 
-OBJ = $(SRC:%.c=%.o)
-OBJ2 = $(SRC2:%.c=%.o)
+SRC_BONUS = ./bonus/client_bonus.c \
+	./bonus/minitalk_utils_bonus.c \
+	./bonus/minitalk_utils2_bonus.c
+
+SRC2_BONUS = ./bonus/server_bonus.c \
+	./bonus/minitalk_utils_bonus.c \
+	./bonus/minitalk_utils2_bonus.c
+
+SRC_CLEAN = client.c \
+	minitalk_utils.c \
+	minitalk_utils2.c \
+	server.c \
+	./bonus/client_bonus.c \
+	./bonus/minitalk_utils_bonus.c \
+	./bonus/minitalk_utils2_bonus.c \
+	./bonus/server_bonus.c
+
+OBJ = $(SRC:.c=.o)
+OBJ2 = $(SRC2:.c=.o)
+
+OBJ_BONUS = $(SRC_BONUS:.c=.o)
+OBJ2_BONUS = $(SRC2_BONUS:.c=.o)
+
+OBJ_CLEAN = $(SRC_CLEAN:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME) $(NAME2)
+
+bonus: fclean $(NAME_BONUS) $(NAME2_BONUS)
 
 $(NAME): $(OBJ)
 	gcc $(FLAGS) $^ -o $(NAME)
@@ -34,15 +61,21 @@ $(NAME): $(OBJ)
 $(NAME2): $(OBJ2)
 	gcc $(FLAGS) $^ -o $(NAME2)
 
+$(NAME_BONUS): $(OBJ_BONUS)
+	gcc $(FLAGS) $^ -o $(NAME_BONUS)
+
+$(NAME2_BONUS): $(OBJ2_BONUS)
+	gcc $(FLAGS) $^ -o $(NAME2_BONUS)
+
 %.o: %.c
 	gcc $(FLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(OBJ2)
+	rm -f $(OBJ_CLEAN)
 
 fclean: clean
-	rm -f $(NAME) $(NAME2)
+	rm -f $(NAME) $(NAME2) $(NAME_BONUS) $(NAME2_BONUS)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
