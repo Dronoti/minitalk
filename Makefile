@@ -6,7 +6,7 @@
 #    By: bkael <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/17 12:11:53 by bkael             #+#    #+#              #
-#    Updated: 2021/07/17 19:00:30 by bkael            ###   ########.fr        #
+#    Updated: 2021/07/18 16:28:09 by bkael            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME) $(NAME2)
 
-bonus: fclean $(NAME_BONUS) $(NAME2_BONUS)
+bonus: $(NAME_BONUS) $(NAME2_BONUS)
 
 $(NAME): $(OBJ)
 	gcc $(FLAGS) $^ -o $(NAME)
