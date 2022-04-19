@@ -24,10 +24,10 @@ git clone https://github.com/Dronoti/minitalk.git minitalk && cd minitalk && mak
 ```
 Исполняемые файлы называются client и server, их необходимо запустить по отдельности:
 ```bash
-./client
+./server
 ```
 ```bash
-./server
+./client
 ```
 
 ### Дополнительно
